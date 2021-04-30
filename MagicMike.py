@@ -3,7 +3,8 @@ import discord
 from discord.ext import commands
 import scrython
 import asyncio
-import readLine 
+import readLine
+import time
 # asyncio does not allow its event loop to be nested, nest_asyncio fixes that!
 import nest_asyncio
 nest_asyncio.apply()
@@ -32,13 +33,14 @@ async def on_message(message):
         end = m.find(']]', start)
         cardName = m[start:end]
 
-        await asyncio.sleep(0.1)
+        time.sleep(0.1)
         card = scrython.cards.Named(fuzzy=cardName)
         
         imgLink = card.image_uris(0, 'normal')
         print(imgLink)
 
         await message.channel.send(imgLink) # Send back the card in chat
-    
 
+    
 client.run(token)
+
