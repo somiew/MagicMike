@@ -43,7 +43,7 @@ async def on_message(message):
         await message.channel.send(imgLink) # Send back the card in chat
 
     if message.content.startswith('QR:'):
-        messageSplit = message.content.split(":")
+        messageSplit = message.content.split("QR:")
         QRMaker.makeQR(messageSplit[1])
         await message.channel.send(file=discord.File('latestQR.png'))
 
