@@ -8,6 +8,7 @@ import time
 # asyncio does not allow its event loop to be nested, nest_asyncio fixes that!
 import nest_asyncio
 nest_asyncio.apply()
+import QRMaker
 
 token = readLine.read_line("token.txt", 0)
 
@@ -40,6 +41,11 @@ async def on_message(message):
         print(imgLink)
 
         await message.channel.send(imgLink) # Send back the card in chat
+
+    if message.content.startswith('QR:'):
+        messageSplit = message.content.split(":")
+        QRMaker.makeQR(messageSplit[1])
+        await message.channel.send(file=discord.File('latestQR.png'))
 
     
 client.run(token)
